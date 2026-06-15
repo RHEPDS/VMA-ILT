@@ -37,8 +37,9 @@ Upon completion of this workshop, participants will be able to:
 | 9:15AM-9:45AM | Sales Motion and Getting the Technical Win |
 | 9:45AM-11:15AM | OpenShift Virt: Overview, Storage, & Networking |
 | 11:30AM-12:45PM | MTV, Migration Factory, and VDI Environments |
-| 1:45PM-2:45PM | Running a Hands-On Workshop at a Customer Site |
-| 2:45PM-4:45PM | **LAB Time 1**: Basics, Network, Storage, and VMware Migration |
+| 1:45PM-2:15PM | Running a Hands-On Workshop at a Customer Site |
+| 2:15PM-3:00PM | Groupwork A "create a technical showcase" |
+| 3:00PM-4:30PM | Groupwork A - Showtime |
 
 ### **Day 2: Analysis & Group Presentation**
 
@@ -46,8 +47,8 @@ Upon completion of this workshop, participants will be able to:
 | :---- | :---- |
 | 9AM-11AM | Analyzing VMware, Risk Analysis, and Migration Diagnostics |
 | 11:15AM-12:15PM | Introduction to Hands-On Groupwork |
-| 1:15PM-3:15PM | **Hands-On Groupwork**: Analysis and Presentation Creation |
-| 3:30PM-5PM | Showtime: Group Presentations |
+| 1:15PM-3:15PM | Groupwork B : Analysis and Presentation Creation |
+| 3:30PM-5PM | Groupwork B - Showtime: Group Presentations |
 
 ### **Day 3: Advanced Topics & Strategy**
 
@@ -57,9 +58,3 @@ Upon completion of this workshop, participants will be able to:
 | 10:45AM-11:45AM | Advanced Cluster Management-V and GitOps |
 | 11:45AM-12:30PM | Choosing the Right Subscription |
 | 12:30PM-12:45PM | Wrap-Up and Conclusion |
-
-Would you like me to draft a localized invitation email to send to potential technical sales participants for this workshop?
-
-Sources:
-
-* [VMA\_ILT\_2026](https://docs.google.com/document/d/1NJRAsTC-6GyhQ3Xumvc-7srOR2jarih_Wp_mJ6Sjz08/edit?usp=drive_web)
