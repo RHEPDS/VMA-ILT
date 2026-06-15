@@ -47,8 +47,8 @@ Upon completion of this workshop, participants will be able to:
 | :---- | :---- |
 | 9AM-11AM | Analyzing VMware, Risk Analysis, and Migration Diagnostics |
 | 11:15AM-12:15PM | Introduction to Hands-On Groupwork |
-| 1:15PM-3:15PM | **Hands-On Groupwork**: Analysis and Presentation Creation |
-| 3:30PM-5PM | Showtime: Group Presentations |
+| 1:15PM-3:15PM | Groupwork B : Analysis and Presentation Creation |
+| 3:30PM-5PM | Groupwork B - Showtime: Group Presentations |
 
 ### **Day 3: Advanced Topics & Strategy**
 
