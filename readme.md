@@ -1,4 +1,4 @@
-# Virtualization Migration Assessment (VMA) Workshop\
+# Virtualization Migration Assessment (VMA) Workshop
 
 ## Overview
 This workshop supports the technical motion of transitioning customers from VMware-based infrastructure to OpenShift-based infrastructure, focusing on the Red Hat Virtualization Migration Assessment (VMA).\
