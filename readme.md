@@ -12,7 +12,7 @@ This workshop supports the technical motion of transitioning customers from VMwa
 - OpenShift Knowledge (DO180)
 - Basic understanding of OpenShift Virt
 - VMware Knowledge
-\
+
 ## Workshop Goals
 - Gain confidence in identifying and convincing customers to commit to a [Virtualization Migration Assessment](https://portfoliohub.redhat.com/v3/serviceskit/openshift_virtualization_assessment).\
 - Understand the existing customer environment.
