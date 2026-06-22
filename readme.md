@@ -1,4 +1,3 @@
-
 # Virtualization Migration Assessment (VMA) Workshop\
 
 ## Overview
