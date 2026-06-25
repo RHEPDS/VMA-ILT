@@ -92,20 +92,20 @@ required_sheets = {
 #    Required by cols_validate and tabs_validate
 #    Generated using cols_prepare during tests
 
-    'vInfo': ['Memory', 'Datacenter', 'Cluster', 'Resource pool', 'NICs', 'VM',
-              'OS according to the VMware Tools', 'Disks'],
-    'vCPU': ['Hot Add', 'Hot Remove'],
-    'vMemory': ['Hot Add', 'Ballooned'],
-    'vMultiPath': ['Disk', 'Display name', 'Vendor', 'Model'],
-    'vSource': ['Fullname', 'API version'],
-    'vHost': ['ESX Version', '# CPU', 'Cores per CPU', '# Cores', 'CPU Model', 'Host',
-              'Vendor', 'Model', 'Datacenter', 'Cluster', '# vCPUs', '# VMs total'],
+    'vInfo': ['Memory', 'Datacenter', 'Cluster', 'Resource_pool', 'NICs', 'VM',
+              'OS_according_to_the_VMware_Tools', 'Disks'],
+    'vCPU': ['Hot_Add', 'Hot_Remove'],
+    'vMemory': ['Hot_Add', 'Ballooned'],
+    'vMultiPath': ['Disk', 'Display_name', 'Vendor', 'Model'],
+    'vSource': ['Fullname', 'API_version'],
+    'vHost': ['ESX_Version', 'N_CPU', 'Cores_per_CPU', 'N_Cores', 'CPU_Model', 'Host',
+              'Vendor', 'Model', 'Datacenter', 'Cluster', 'N_vCPUs', 'N_VMs_total'],
     'vTools': ['Tools'],
     'vNIC': ['Datacenter', 'Driver', 'Speed', 'Duplex', 'MAC', 'Host'],
     'vNetwork': ['Network', 'VM'],
-    'vDatastore': ['Type', 'Capacity MiB', 'Provisioned MiB', 'In Use MiB', 'Object ID'],
-    'vDisk': ['Controller', 'VM', 'Capacity MiB'],
-    'vPartition': ['Annotation', 'Capacity MiB', 'Disk', 'Free MiB'],
+    'vDatastore': ['Type', 'Capacity_MiB', 'Provisioned_MiB', 'In_Use_MiB', 'Object_ID'],
+    'vDisk': ['Controller', 'VM', 'Capacity_MiB'],
+    'vPartition': ['Annotation', 'Capacity_MiB', 'Disk', 'Free_MiB'],
     'vHBA': ['Model', 'Type']
 }
 
@@ -129,8 +129,7 @@ def cols_validate(tab, file, df):
                 print("ERROR: Column [" + col + "] is required in sheet [" + tab + "] in file [" + file + "]")
                 data_ok = False
             else:
-                df[col] = df[col].fillna(
-                    'No' + col.replace(' ', '_'))  # replace empty value by "NoNetwork", "NoCluster", etc
+                df[col] = df[col].fillna('No' + col)
 
     pcol = "none"
     for col in df.columns:
@@ -1249,6 +1248,24 @@ def add_p():
 '''
 
 
+def _normalize_column_name(name):
+    """
+    Map RVTools / Excel header variants to the canonical names used in this pipeline.
+    """
+    if not isinstance(name, str):
+        return name
+    s = name.strip().replace(' ', '_').replace('#', 'N')
+    aliases = {
+        'display_name': 'Display_name',
+        'diplay_name': 'Display_name',
+    }
+    return aliases.get(s.lower(), s)
+
+
+def _normalize_dataframe_columns(df):
+    df.columns = [_normalize_column_name(c) for c in df.columns]
+
+
 def _ingest_excel_workbook(sheets, basename, sheets_dict):
     """
     Merge one workbook's sheets into sheets_dict (mutates sheets_dict).
@@ -1263,11 +1280,10 @@ def _ingest_excel_workbook(sheets, basename, sheets_dict):
         sheet_key = f"{sheet_name}@{basename}"
         print("        storing sheet [" + sheet_key + "] in dictionary")
 
+        _normalize_dataframe_columns(df)
+
         if not cols_validate(sheet_name, basename, df):
             data_ok = False
-
-        df.columns = [c.replace(' ', '_') for c in df.columns]
-        df.columns = [c.replace('#', 'N') for c in df.columns]
 
         sheets_dict[sheet_key] = df
         sheet_count += 1
@@ -1357,7 +1373,14 @@ def clean_and_fix_data(sheets_dict):
     """
     # remove everything between '(' and ')' in storage Display Name
     vMultiPath_df = combine_data_sheets(sheets_dict, 'vMultiPath')
-    vMultiPath_df['Display_name'] = vMultiPath_df['Display_name'].str.replace(r'\(.*\)', '', regex=True)
+    if 'Display_name' not in vMultiPath_df.columns:
+        raise ValueError(
+            "Missing column Display_name on sheet vMultiPath "
+            "(expected RVTools header: Display name)."
+        )
+    vMultiPath_df['Display_name'] = (
+        vMultiPath_df['Display_name'].astype(str).str.replace(r'\(.*\)', '', regex=True)
+    )
 
     # remove "VMware Virtual Processor" when exist (only few cases)
     vHost_df = combine_data_sheets(sheets_dict, 'vHost')
